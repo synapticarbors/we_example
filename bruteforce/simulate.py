@@ -1,4 +1,6 @@
 import sys
+# Ugly hackish modification of the python path
+sys.path.insert(0, '..')
 if not any(p in sys.path for p in ['', '.']):
     sys.path.insert(0, '')
 
@@ -55,15 +57,18 @@ def run(NUM_BLOCKS, STEPS_PER_BLOCK, BLOCKS_PER_DUMP, sim_params):
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Simulate Dickson Ring Potential')
-    parser.add_argument('--nblocks',dest='nblocks',action='store',type=int)
-    parser.add_argument('--steps',dest='steps',action='store',type=int)
-    parser.add_argument('--dsize',dest='dsize',action='store',type=int)
+    parser.add_argument('--nblocks', '-N', dest='nblocks', action='store', type=int,
+            help='Number of blocks to run')
+    parser.add_argument('--steps', '-s', dest='steps', action='store', type=int,
+            help='Steps per block')
+    parser.add_argument('--dsize', dest='dsize', action='store', type=int,
+            help='Write frequency in number of blocks')
 
     args = parser.parse_args()
 
     sim_params = {'h': 5.0,
                   'r0': 1.0,
-                  'dr': 0.1,
+                  'dr': 0.02,
                   'outname': 'bruteforce.h5'}
 
     run(args.nblocks, args.steps, args.dsize, sim_params)

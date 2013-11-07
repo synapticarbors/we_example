@@ -58,7 +58,7 @@ cdef class Sampler:
         v_curr = V(r_curr, self.r0, self.h)
 
         for k in xrange(steps):
-            r_trial = r_curr + self.dr * rk_gauss(self.rng_state)
+            r_trial = r_curr + self.dr * (1.0 - 2*rk_double(self.rng_state))
             v_trial = V(r_trial, self.r0, self.h)
 
             if v_trial < v_curr:
@@ -73,3 +73,24 @@ cdef class Sampler:
                 traj[ti] = r_curr
                 ti += 1
 
+    def step_simple(self, double r_init, int steps):
+        cdef:
+            double r_curr, r_trial, v_curr, v_trial
+            unsigned int k
+
+        r_curr = r_init
+        v_curr = V(r_curr, self.r0, self.h)
+
+        for k in xrange(steps):
+            r_trial = r_curr + self.dr * rk_gauss(self.rng_state)
+            v_trial = V(r_trial, self.r0, self.h)
+
+            if v_trial < v_curr:
+                r_curr = r_trial
+                v_curr = v_trial
+            else:
+                if exp(-(v_trial - v_curr)) > rk_double(self.rng_state):
+                    r_curr = r_trial
+                    v_curr = v_trial
+
+        return r_curr
