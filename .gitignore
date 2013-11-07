@@ -1,0 +1,13 @@
+# Vim
+*.swo
+*.swp
+
+# Python/Cython
+*.o
+*.so
+*.pyc
+*.html
+
+# Simulation
+*.log
+*.h5
