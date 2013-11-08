@@ -66,7 +66,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    sim_params = {'h': 5.0,
+    sim_params = {'h': 4.0,
                   'r0': 1.0,
                   'dr': 0.02,
                   'outname': 'bruteforce.h5'}

@@ -31,7 +31,7 @@ class MonteCarloPropagator(WESTPropagator):
         self.nsteps = rc.get('blocks_per_iteration', 2)
         self.nsubsteps = rc.get('steps_per_block')
 
-        h = 5.0 
+        h = 4.0 
         r0 = 1.0
         dr = 0.02
 
