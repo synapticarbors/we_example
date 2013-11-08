@@ -33,7 +33,7 @@ class MonteCarloPropagator(WESTPropagator):
 
         h = 5.0 
         r0 = 1.0
-        dr = 0.1
+        dr = 0.02
 
         self.sampler = mcsampler.Sampler(h, r0, dr, np.random.randint(2**32-1))
 
