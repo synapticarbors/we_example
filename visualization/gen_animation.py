@@ -79,7 +79,7 @@ class WEAnimation(object):
         self.ani = animation.FuncAnimation(self.fig, self.animate, frames=self.step_lim,
                                       interval=10,)# init_func=self.init)
 
-        self.ani.save('we_example.mp4', fps=30,)# extra_args=['-vcodec', 'libx264'])
+        #self.ani.save('we_example.mp4', fps=30,)# extra_args=['-vcodec', 'libx264'])
 
     def load_bruteforce_data(self):
         with h5py.File('../bruteforce/bruteforce.h5', 'r') as h5bf:
@@ -102,8 +102,15 @@ class WEAnimation(object):
             p = f['histograms'][:]
             b = f['midpoints_0'][:]
 
-        #pcum = pd.rolling_sum(p, window=200, min_periods=0, axis=0)
-        pcum = np.cumsum(p, axis=0)
+        pcum = np.zeros_like(p)
+        pcum = pd.rolling_sum(p, window=40, min_periods=0, axis=0)
+        #pcum[:50,:] = pd.rolling_sum(p[:50,:], window=10, min_periods=0, axis=0)
+        #pcum[50:150,:] = pd.rolling_sum(p[50:150,:], window=25, min_periods=0, axis=0)
+        #pcum[150:,:] = pd.rolling_sum(p[150:,:], window=100, min_periods=0, axis=0)
+        
+        #pcum = np.cumsum(p, axis=0)
+        
+        
         pcum /= pcum.sum(axis=1)[:, np.newaxis]
 
         return pcum, b
@@ -141,4 +148,4 @@ class WEAnimation(object):
 
 if __name__ == '__main__':
     a = WEAnimation(2000)
-    #a.show()
+    a.show()
