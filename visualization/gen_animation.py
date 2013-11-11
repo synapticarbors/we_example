@@ -44,14 +44,14 @@ class WEAnimation(object):
                              xlim=(0.5, 2.5), ylim=(-1, 10))
 
         self.ax_dist = self.fig.add_subplot(313, autoscale_on=False,
-                             xlim=(0.5, 2.5), ylim=(1E-7, 1))
+                             xlim=(0.5, 2.5), ylim=(1E-7, 0.15))
 
         self.bf_pot, = self.ax_bf.plot([], [], 'b-', lw=2)
         self.we_pot, = self.ax_we.plot([], [], 'r-', lw=2)
         
-        self.target_dist, = self.ax_dist.semilogy([], [], 'k--', lw=1)
-        self.bf_dist, = self.ax_dist.semilogy([], [], 'b-', lw=1)
-        self.we_dist, = self.ax_dist.semilogy([], [], 'r-', lw=1)
+        self.target_dist, = self.ax_dist.semilogy([], [], '-', c='gray', lw=2)
+        self.bf_dist, = self.ax_dist.semilogy([], [], 'b-', lw=2)
+        self.we_dist, = self.ax_dist.semilogy([], [], 'r-', lw=2)
 
         # Use axis grid to show bin boundaries for WE
         self.ax_we.set_xticks(self.bin_bounds, minor=True)

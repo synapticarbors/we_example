@@ -4,7 +4,7 @@ setup:
 	cd mcsampler && python setup.py build_ext -i
 
 bruteforce-run:
-	cd bruteforce && python simulate.py -N 1000000 -s 25 --dsize 400000
+	cd bruteforce && python simulate.py -N 10000000 -s 25 --dsize 400000
 
 bruteforce-analyze:
 	cd bruteforce && python analyze.py
